@@ -38,6 +38,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MyService::class.java)
             startService(intent)
         }
+        val button3: Button = findViewById(R.id.button_3)
+        button3.setOnClickListener {
+            val isServiceEnabled = isAccessibilitySettingsOn(MyAccessibilityService::class.java)
+            if (isServiceEnabled) {
+                Toast.makeText(this, "Accessibility Service is enabled", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Accessibility Service is not enabled", Toast.LENGTH_SHORT).show()
+                PermissionUtils.settingAccessibility(this@MainActivity)
+            }
+        }
     }
 
 

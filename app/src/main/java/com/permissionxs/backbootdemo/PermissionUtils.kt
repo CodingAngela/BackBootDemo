@@ -91,4 +91,23 @@ object PermissionUtils {
             Toast.makeText(context, "待实现", Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun settingAccessibility(context: Context) {
+        if (Build.BRAND == "OnePlus") {
+            val boot_intent = Intent()
+            boot_intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            boot_intent.setAction("android.settings.ACCESSIBILITY_SETTINGS")
+            context.startActivity(boot_intent)
+        } else if (Build.BRAND == "google") {
+            val boot_intent = Intent()
+            boot_intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            val componentName =
+                ComponentName.unflattenFromString("com.android.settings/.Settings\$AccessibilitySettingsActivity")
+            boot_intent.setData(Uri.fromParts("package", context.packageName, null))
+            boot_intent.setComponent(componentName)
+            context.startActivity(boot_intent)
+        } else {
+            Toast.makeText(context, "待实现", Toast.LENGTH_SHORT).show()
+        }
+    }
 }

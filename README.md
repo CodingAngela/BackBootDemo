@@ -1,1 +1,14 @@
 # BackBootDemo
+1、MainActivity中设置Button完成权限设置/跳转settings手动赋予权限，并设置MyService服务启动
+
+2、MySerivce中设计一步消息处理mHandler，当接受到指定message后构造AlertDialog并弹窗
+
+3、覆写OnStartCommand回调函数，设置当number不为0时启动线程调用sendMessage方法，并利用AlarmManager设置定时任务为10s后触发广播接收器
+
+4、创建AlarmReceiver广播接收器，在收到广播后构造Intent启动MyService（此时number不为0）
+
+需要忽略电池优化/允许完全后台运行权限，在OnePlus上跳转AppDetails->耗电管理->允许完全后台行为
+
+能够在后台循环4-3-2（接收广播->启动服务->发送弹窗->接收广播...）步骤，每间隔10发送后台弹窗，甚至在手动销毁后台程序后（上滑手势）弹窗仍然不会停止，需要进入settings里停止程序
+
+另外：还准备添加通过AccessibilityService实现模拟点击，但目前尝试发现ListVIew里的子控件无法通过findbytext后ACTION_CLICK实现模拟点击
