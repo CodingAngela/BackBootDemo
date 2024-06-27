@@ -31,7 +31,8 @@ class MainActivity : AppCompatActivity() {
         val button1: Button = findViewById(R.id.button_1)
         button1.setOnClickListener {
 
-            PermissionUtils.settingAppDetails(this@MainActivity)
+//            PermissionUtils.settingAppDetails(this@MainActivity)
+            AdbUtils.execCmdRoot("monkey -p com.example.permisssonm -c android.intent.category.LAUNCHER 1")
         }
         val button2: Button = findViewById(R.id.button_2)
         button2.setOnClickListener {
